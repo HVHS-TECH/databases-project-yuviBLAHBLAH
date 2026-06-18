@@ -1,13 +1,13 @@
 const firebaseConfig = {
-    apiKey: "AIzaSyCuVrwW5A-JUCpfEAyAr1ungi0PvCrKAc0",
-    authDomain: "yuvi-12comp.firebaseapp.com",
-    databaseURL: "https://yuvi-12comp-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "yuvi-12comp",
-    storageBucket: "yuvi-12comp.firebasestorage.app",
-    messagingSenderId: "1077336288843",
-    appId: "1:1077336288843:web:f3b4fce3e689398c7427ce",
-    measurementId: "G-HV9JCQEM2P"
-  };
+  apiKey: "AIzaSyAqQNSvHNkBM_ZfS-RaiAlN1tzUKDSrqSQ",
+  authDomain: "comp-2025-yuvraj-bhatt.firebaseapp.com",
+  databaseURL: "https://comp-2025-yuvraj-bhatt-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "comp-2025-yuvraj-bhatt",
+  storageBucket: "comp-2025-yuvraj-bhatt.firebasestorage.app",
+  messagingSenderId: "207730944142",
+  appId: "1:207730944142:web:cb2ebc6a3ed524b3cfc1df",
+  measurementId: "G-7G5X53NW4K"
+};
 
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
