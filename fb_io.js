@@ -13,7 +13,7 @@ function fb_login(){
 function fb_handleLogin(_user){
   if (_user) {
     console.log("user has logged in")
-    HTML_OUTPUT.innerHTML = "yello " + name
+    HTML_OUTPUT.innerHTML = "you have logged in " + name
     GLOBAL_user = _user; //save the user details object to a global var.
   
   } else{

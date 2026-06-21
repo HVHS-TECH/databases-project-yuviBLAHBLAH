@@ -9,11 +9,11 @@ function writeForm() {
     const fruitQuantity = document.getElementById("fruitQuantity").value;
     console.log("fruitpplworks")
 
-    firebase.database().ref('/' + fruitPeople).set(
+    firebase.database().ref('' + global uid).set(
         {
-            name: name,
-            //gameName: favoriteFruit,
-            age: fruitQuantity,
+            game: game number
+            user: users uid
+            score: score from last played game
         }
     )
 }
@@ -28,3 +28,4 @@ function list() {
         }
     )
 }
+
