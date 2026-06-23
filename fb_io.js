@@ -4,7 +4,7 @@ function fb_authenticate(){
     // authenticate with Google
 }
 
-var GLOBAL_user;e
+var GLOBAL_user;
 
 function fb_login(){
  authenticationListener = firebase.auth().onAuthStateChanged(fb_handleLogin);

@@ -3,13 +3,13 @@ console.log("runing website")
 
 function writeForm() {
     // Get the form data
-    let fruitPeople = GLOBAL_user.uid
+    let ID = GLOBAL_user.uid
     //const favoriteFruit = document.getElementById("favoriteFruit").value;
     const name = document.getElementById("name").value;
     const fruitQuantity = document.getElementById("fruitQuantity").value;
-    console.log("fruitpplworks")
+    console.log("getting name,score and game number works")
 
-    firebase.database().ref('' + global uid).set(
+    firebase.database().ref('' + ID).set(
         {
             game: game number
             user: users uid
