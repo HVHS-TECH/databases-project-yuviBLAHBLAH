@@ -9,10 +9,10 @@ function writeForm() {
     const fruitQuantity = document.getElementById("fruitQuantity").value;
     console.log("getting name,score and game number works")
 
-    firebase.database().ref('' + ID).set(
+    firebase.database().ref('/' + ID).set(
         {
-            game: game number
-            user: users uid
+            game: game number // user the () in a function to get the score from the game, can use multiple for getting multiple values at a time
+            user: ID
             score: score from last played game
         }
     )

@@ -8,7 +8,7 @@ function preload() {
 
 	imgHorsi = loadImage('Images/horsi g.png');
 	imgBG = loadImage('Images/background.jpg');
-}	
+}
 let score = 0
 let stars = []
 /*******************************************************/
@@ -25,24 +25,24 @@ function setup() {
 		messagingSenderId: "207730944142",
 		appId: "1:207730944142:web:cb2ebc6a3ed524b3cfc1df",
 		measurementId: "G-7G5X53NW4K"
-	  };
-	  
-		// Initialize Firebase
-		firebase.initializeApp(firebaseConfig);
-	  
-		// This log prints the firebase object to the console to show that it is working.
-		// As soon as you have the script working, delete this log.
-		console.log("Firebase initialize finished:");
-		console.log(firebase);
+	};
 
-    stars = []; // Add this just to be safe to reset the list
-    for (let i = 0; i < 100; i++) {
-        stars.push({
-            x: random(width),
-            y: random(height),
-            size: random(1, 4)
-        });
-    }
+	// Initialize Firebase
+	firebase.initializeApp(firebaseConfig);
+
+	// This log prints the firebase object to the console to show that it is working.
+	// As soon as you have the script working, delete this log.
+	console.log("Firebase initialize finished:");
+	console.log(firebase);
+
+	stars = []; // Add this just to be safe to reset the list
+	for (let i = 0; i < 100; i++) {
+		stars.push({
+			x: random(width),
+			y: random(height),
+			size: random(1, 4)
+		});
+	}
 	//set framerate as 120
 	frameRate(120)
 	console.log("setup: ");
@@ -68,7 +68,7 @@ function setup() {
 	// create a new group for pipes
 	pipes = new Group();
 	makePipes();
-	
+
 
 	textSize(32);
 	fill(255);
@@ -118,19 +118,9 @@ function drawGame() {
 		horse.speed = 2.5;
 		horse.direction = -90
 	};
-	
-for (let i = 0; i < 10; i++) {
-	// for loop that does absolutley nothing and glitches while making the background grey.
-    if ((i + frameCount) % 2 == 0) {
-        fill(255); // White
-    } else {
-        fill(0);   // Black
-    }
-    
-    noStroke();
-    // Draw a rectangle for each part of the loop
-    rect(i * (width / 10), 0, width / 10, height);
-}
+
+	background('white')
+
 	if (horse.collides(pipes)) {
 		console.log("ouch");
 		gameState = "gameover";
@@ -148,8 +138,8 @@ for (let i = 0; i < 10; i++) {
 function drawGameOver() {
 	background('red')
 	text("YOU LOST!", windowWidth / 2 - 80, windowHeight / 2);
-    text("Refresh tab to restart", windowWidth / 2 - 120, windowHeight / 2 + 50);
-	text("your score was " +score, windowWidth / 2 - 90, windowHeight / 2 + 100);
+	text("Refresh tab to restart", windowWidth / 2 - 120, windowHeight / 2 + 50);
+	text("your score was " + score, windowWidth / 2 - 90, windowHeight / 2 + 100);
 }
 
 
