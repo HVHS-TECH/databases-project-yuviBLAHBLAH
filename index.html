@@ -30,8 +30,8 @@
             <label for="name">Your Name:</label>
             <input type="text" id="name" name="name" required />
 
-           <!--<label for="favoriteFruit">Game Name:</label>-->
-           <!-- <input type="text" id="favoriteFruit" name="favoriteFruit" required />-->
+            <!--<label for="favoriteFruit">Game Name:</label>-->
+            <!-- <input type="text" id="favoriteFruit" name="favoriteFruit" required />-->
 
             <label for="fruitQuantity">what is your age?</label>
             <input type="number" id="fruitQuantity" name="fruitQuantity" required />
@@ -42,6 +42,13 @@
         <button onclick="writeForm()">Submit</button>
 
         <p id="statusMessage"></p>
+
+        <div id="leaderboards">
+            <h2>Flappy horse highscores</h2>
+            <ol> id="flappyHorseLeaderboard"
+                <li>loading scores.</li>
+            </ol>
+        </div>
     </div>
     <script src="fb_io.js"></script>
     <script src="script.js"></script>
