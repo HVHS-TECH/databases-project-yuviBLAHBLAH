@@ -2,7 +2,7 @@ const HTML_OUTPUT = document.getElementById('statusMessage');
 console.log("running website");
 
 // Pass the game number and the score directly into the function when the game ends
-function writeForm(gameNumber, scoreFromGame) {
+function writeForm(gameNumber = 1, scoreFromGame = 0) {
     // Ensure a user is logged in
     if (!GLOBAL_user) {   // note to serlf the ! means not as --> not global user
         HTML_OUTPUT.innerText = "Error, No user logged in.";
@@ -54,7 +54,7 @@ function displayLeaderboard() {
         LeaderboardList.innerHTML = '';
         const scoresArray = [];
 
-        snapshot.forEach(function(childSnapshot)) {
+        snapshot.forEach(function(childSnapshot)){
             const data = childSnapshot.val();
             scoresArray.push(data);
         }
@@ -74,4 +74,4 @@ if (scoresArray.lenght === 0) {
 }
 
 // run the function as soon as the script loads
-displayLeaderboard();
+displayLeaderboard(); 
