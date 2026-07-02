@@ -1,37 +1,46 @@
+console.log("does ts even work bru");
 const HTML_OUTPUT = document.getElementById('statusMessage');
-console.log("running website");
 
 // Pass the game number and the score directly into the function when the game ends
-function writeForm(gameNumber, scoreFromGame) {
+function writeForm() {
     // Ensure a user is logged in
-    if (!GLOBAL_user) {   // note to serlf the ! means not as --> not global user
+    if (!GLOBAL_user) {
         HTML_OUTPUT.innerText = "Error, No user logged in.";
         return;
     }
 
-    let ID = GLOBAL_user.uid 
+    let ID = GLOBAL_user.uid;
 
-    // Get the name from your HTML input element
-    const playerName = document.getElementById("name").value;
+    //Get the Name from the form
+    const userName = document.getElementById("name").value;
 
-    // Ensure the score is treated as a number, not text
-    const finalScore = Number(scoreFromGame);
-    console.log("Saving score for Game " + gameNumber + ": " + playerName + " got " + finalScore);
+    //Get the Age from the form (using fruitQuantity ID)
+    const ageInput = document.getElementById("userAge").value;
+    const userAge = Number(ageInput); // Converts the text to a number
 
-    // Save to Firebase
-    // /scores/game_number/user_uid
+    //Hardcode the Game Number (since the form doesn't ask for it yet)
+    const gameNumber = 1;
+
+    //Set a default score of 0 (so the leaderboard doesn't break)
+    const finalScore = 0;
+
+    //Log it to the console to make sure we grabbed the age correctly
+    console.log("Saving profile: " + userName + " (Age: " + userAge + ") for Game " + gameNumber);
+
+    // Save everything to Firebase
     firebase.database().ref('scores/game_' + gameNumber + '/' + ID).set({
-        username: playerName,
+        username: userName,
+        age: userAge,
         userUid: ID,
         score: finalScore,
-        timestamp: Date.now() // This is to break ties by having the most recent score on top
+        timestamp: Date.now() // this is so the latest score is shown at the top fpr tiebreakers
     })
         .then(function () {
-            HTML_OUTPUT.innerText = "Score saved successfully!";
+            HTML_OUTPUT.innerText = "Profile saved successfully!";
         })
         .catch(function (error) {
             console.error("Firebase write failed: ", error);
-            HTML_OUTPUT.innerText = "Failed to save score.";
+            HTML_OUTPUT.innerText = "Failed to save profile.";
         });
 }
 function list() {
@@ -47,31 +56,37 @@ function list() {
 }
 
 function displayLeaderboard() {
-    const LeaderboardList = document.getElementById('flappyHorseleaderboard');
-    const scoresRef = firebase.database().ref('scores/game_1')orderByChild('score').limitToLast(5);
+    const leaderboardList = document.getElementById('flappyHorseLeaderboard');
 
-    scoresRef.on('value',fucntion(snapshot)) {
-        LeaderboardList.innerHTML = '';
+    // LOOK HERE: Make sure there is a dot (.) before orderByChild and limitToLast
+    const scoresRef = firebase.database().ref('scores/game_1').orderByChild('score').limitToLast(5);
+
+    scoresRef.on('value', function (snapshot) {
+        leaderboardList.innerHTML = '';
         const scoresArray = [];
 
-        snapshot.forEach(function(childSnapshot)){
+        snapshot.forEach(function (childSnapshot) {
             const data = childSnapshot.val();
             scoresArray.push(data);
+        });
+
+        scoresArray.reverse();
+
+        for (let i = 0; i < scoresArray.length; i++) {
+            const player = scoresArray[i];
+            const listItem = document.createElement('li');
+            listItem.innerText = player.username + " - " + player.score + " points";
+            leaderboardList.appendChild(listItem);
         }
-    }
-}
- scoresArray.reverse();
 
- for (let i = 0; i < scoresArray.Length; i++) {
-    const player = scoresArray[i];
-    const listItem = document.createElement('li');
-    listItem.innerText = player.username + " - " + player.score + " points";
-    leaderboardList.appendChild(listItem);
- }
-
-if (scoresArray.lenght === 0) {
-    leaderboardList.innerHTML = '<li>No current highscore, play the game</li>';
+        if (scoresArray.length === 0) {
+            leaderboardList.innerHTML = '<li>No high scores yet. Be the first!</li>';
+        }
+    }, function (error) {
+        console.error("Error reading scores from Firebase: ", error);
+        leaderboardList.innerHTML = '<li>Failed to load scores.</li>';
+    });
 }
 
-// run the function as soon as the script loads
-displayLeaderboard(); 
+// Run the function
+displayLeaderboard();
