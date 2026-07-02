@@ -2,7 +2,7 @@ const HTML_OUTPUT = document.getElementById('statusMessage');
 console.log("running website");
 
 // Pass the game number and the score directly into the function when the game ends
-function writeForm(gameNumber = 1, scoreFromGame = 0) {
+function writeForm(gameNumber, scoreFromGame) {
     // Ensure a user is logged in
     if (!GLOBAL_user) {   // note to serlf the ! means not as --> not global user
         HTML_OUTPUT.innerText = "Error, No user logged in.";
