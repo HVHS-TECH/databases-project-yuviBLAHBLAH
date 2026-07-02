@@ -124,6 +124,7 @@ function drawGame() {
 	if (horse.collides(pipes)) {
 		console.log("ouch");
 		gameState = "gameover";
+		saveGameScore(score); // this is so the game saves the score for me to send to firbase
 	}
 
 	text(score, windowWidth / 2 - 40, 150);
@@ -159,6 +160,55 @@ function draw() {
 
 	}
 
+}
+
+function saveGameScore(gameScore) {
+	//Get the user currently logged into this session
+	var user = firebase.auth().currentUser;
+
+	if (user) {
+		var ID = user.uid;
+		var gameNumber = 1; // 1 = Flappy Horse
+
+		// Target this specific players slot in the database
+		var scoreRef = firebase.database().ref('scores/game_' + gameNumber + '/' + ID);
+
+		// force the gamescore variable to be a number instead of text
+		var newScore = Number(gameScore);
+
+		//Read their current record first so it doesnt accidentally overwrite a higher highscore
+		scoreRef.once('value').then(function (snapshot) {
+			var currentData = snapshot.val();
+			var oldHighScore = 0;
+
+			if (currentData && currentData.score !== undefined) { //the && tells js that both conditons must be true to proceed wiith running the code inside the {} brackets
+				// force the existing score from firebase to be treated as a number
+				oldHighScore = Number(currentData.score);
+			}
+
+			console.log("Comparing scores - New: " + newScore + " Old Best: " + oldHighScore);
+
+			//ONLY update Firebase if the new score is higher than users old one
+			if (newScore > oldHighScore) {
+				console.log("New High Score! Saving " + newScore + " to Firebase.");
+
+				// .update() changes the score and timestamp but leaves their name and age as it is
+				scoreRef.update({
+					score: newScore,
+					timestamp: Date.now()
+				}).then(function () {
+					console.log("Database update successful!");
+				}).catch(function (error) {
+					console.error("Database update failed: ", error);
+				});
+			} else {
+				console.log("Score of " + newScore + " didn't beat personal best of " + oldHighScore);
+			}
+		});
+
+	} else {
+		console.log("No user logged in. Play from the main menu to track scores!");
+	}
 }
 /*******************************************************/
 //  END OF APP

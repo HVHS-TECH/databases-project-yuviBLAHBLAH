@@ -9,6 +9,7 @@ function writeForm() {
         return;
     }
 
+
     let ID = GLOBAL_user.uid;
 
     //Get the Name from the form
@@ -81,6 +82,14 @@ function displayLeaderboard() {
 
         if (scoresArray.length === 0) {
             leaderboardList.innerHTML = '<li>No high scores yet. Be the first!</li>';
+        }
+
+        // if a user logs in, update the link to include their unique id so the game knows who they are
+        if (typeof GLOBAL_user !== 'undefined' && GLOBAL_user) {
+            const flappyLink = document.getElementById("flappyLink");
+            if (flappyLink) {
+                flappyLink.href = "programming-project-yuviBLAHBLAH-main/playGame.html?uid=" + GLOBAL_user.uid;
+            }
         }
     }, function (error) {
         console.error("Error reading scores from Firebase: ", error);

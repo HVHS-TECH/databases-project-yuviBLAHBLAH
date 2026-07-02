@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>12 COMP</title>
 
-    <!-- Firebase App (core Firebase SDK) is always required & must be listed 1st -->
     <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
-    <!-- Add Firebase products that you want to use -->
     <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js"></script>
@@ -21,7 +19,8 @@
         <h1>Database project</h1>
         <h2>and games</h2>
 
-        <a href="programming-project-yuviBLAHBLAH-main/index.html">flappy horse</a>
+        <button id="flappyLink" onclick="location.href='programming-project-yuviBLAHBLAH-main/playGame.html'">click
+            me!</button>
         <a href="12COMP-Demo-Game-main/12COMP-Demo-Game-main/index.html">demo game</a>
 
         <button onclick="fb_login()">Login with Google</button>
@@ -30,13 +29,9 @@
             <label for="name">Your Name:</label>
             <input type="text" id="name" name="name" required />
 
-            <!--<label for="favoriteFruit">Game Name:</label>-->
-            <!-- <input type="text" id="favoriteFruit" name="favoriteFruit" required />-->
-
             <label for="userAge">what is your age?</label>
             <input type="number" id="userAge" name="userAge" required />
 
-            <!-- add more fields here -->
         </form>
 
         <button onclick="writeForm()">Submit form</button>
@@ -50,9 +45,9 @@
             </ol>
         </div>
     </div>
-    <script src="fb_io.js"></script>
-    <script src="script.js"></script>
-    <script src="fb_setub.js"></script>
+<script src="fb_setub.js"></script>
+<script src="fb_io.js"></script>
+<script src="script.js"></script>
 </body>
 
 </html>
